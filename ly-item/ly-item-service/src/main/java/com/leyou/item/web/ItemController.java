@@ -19,7 +19,7 @@ public class ItemController {
     @PostMapping
     public ResponseEntity<Item> saveItem(Item item) {
         if (item.getPrice() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            throw new RuntimeException("价格不能为空");
         }
         item = itemService.saveItem(item);
         return ResponseEntity.status(HttpStatus.CREATED).body(item);
