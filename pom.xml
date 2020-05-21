@@ -10,8 +10,7 @@
         <module>ly-registry</module>
         <module>ly-api-gateway</module>
         <module>ly-item</module>
-        <module>ly-item-interface</module>
-        <module>ly-item-service</module>
+        <module>ly-common</module>
     </modules>
     <packaging>pom</packaging>
 
