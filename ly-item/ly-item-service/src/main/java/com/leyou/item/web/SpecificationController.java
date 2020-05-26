@@ -1,6 +1,7 @@
 package com.leyou.item.web;
 
 import com.leyou.item.pojo.SpecGroup;
+import com.leyou.item.pojo.SpecParam;
 import com.leyou.item.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -50,5 +52,10 @@ public class SpecificationController {
     public ResponseEntity<List<SpecGroup>> deleteGroup(@PathVariable("id") Long id) {
         specificationService.deleteGroup(id);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("params")
+    public ResponseEntity<List<SpecParam>> queryParamByGid(@RequestParam("gid") Long gid) {
+        return ResponseEntity.ok(specificationService.queryParamByGid(gid));
     }
 }
