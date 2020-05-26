@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SpecificationService {
@@ -24,5 +25,33 @@ public class SpecificationService {
             throw new LyException(ExceptionEnum.SPEC_GROUP_NOT_FOUND);
         }
         return list;
+    }
+
+    public void addGroup(Map<String, Object> map) {
+        SpecGroup group = new SpecGroup();
+        group.setCid(Long.parseLong(map.get("cid").toString()));
+        group.setName(map.get("name").toString());
+        int count = groupMapper.insert(group);
+        if (count != 1) {
+            throw new LyException(ExceptionEnum.SPEC_GROUP_SAVE_ERROR);
+        }
+    }
+
+    public void editGroup(Map<String, Object> map) {
+        SpecGroup group = new SpecGroup();
+        group.setId(Long.parseLong(map.get("id").toString()));
+        group.setName(map.get("name").toString());
+        group.setCid(Long.parseLong(map.get("cid").toString()));
+        int count = groupMapper.updateByPrimaryKey(group);
+        if (count != 1) {
+            throw new LyException(ExceptionEnum.SPEC_GROUP_SAVE_ERROR);
+        }
+    }
+
+    public void deleteGroup(Long id) {
+        int count = groupMapper.deleteByPrimaryKey(id);
+        if (count != 1) {
+            throw new LyException(ExceptionEnum.SPEC_GROUP_DELETE_ERROR);
+        }
     }
 }
