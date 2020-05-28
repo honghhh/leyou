@@ -104,6 +104,12 @@ public class GoodsService {
             throw new LyException(ExceptionEnum.GOODS_SAVE_ERROR);
         }
 
+        // 新增sku和stock
+        saveSkuAndStock(spu);
+    }
+
+    private void saveSkuAndStock(Spu spu) {
+        int count;
         List<Stock> stocks = new ArrayList<>();
         // 新增sku
         List<Sku> skus = spu.getSkus();
@@ -125,7 +131,7 @@ public class GoodsService {
 
         // 批量新增库存
         count = stockMapper.insertList(stocks);
-        if (count != 1) {
+        if (count != stocks.size()) {
             throw new LyException(ExceptionEnum.GOODS_SAVE_ERROR);
         }
     }
@@ -145,14 +151,6 @@ public class GoodsService {
         if (CollectionUtils.isEmpty(list)) {
             throw new LyException(ExceptionEnum.GOODS_SKU_NOT_FOUND);
         }
-        // 查询库存
-        // for (Sku s : list) {
-        //     Stock stock = stockMapper.selectByPrimaryKey(s.getId());
-        //     if (stock == null) {
-        //         throw new LyException(ExceptionEnum.GOODS_STOCK_NOT_FOUND);
-        //     }
-        //     s.setStock(stock.getStock());
-        // }
 
         // 查询库存优化
         List<Long> ids = list.stream().map(Sku::getId).collect(Collectors.toList());
@@ -166,7 +164,38 @@ public class GoodsService {
         return list;
     }
 
+    @Transactional
     public void updatesGoods(Spu spu) {
-        // 删除sku和stock
+        if (spu.getId() == null) {
+            throw new LyException(ExceptionEnum.GOODS_ID_CANNOT_BE_NULL);
+        }
+        Sku sku = new Sku();
+        sku.setSpuId(spu.getId());
+        // 查询以前的sku
+        List<Sku> skuList = skuMapper.select(sku);
+        if (!CollectionUtils.isEmpty(skuList)) {
+            // 删除以前的sku
+            skuMapper.delete(sku);
+            // 删除以前的stock
+            List<Long> ids = skuList.stream().map(Sku::getId).collect(Collectors.toList());
+            stockMapper.deleteByIdList(ids);
+        }
+        // 修改spu
+        spu.setValid(null);
+        spu.setSaleable(null);
+        spu.setLastUpdateTime(new Date());
+        spu.setCreateTime(null);
+        int count = spuMapper.updateByPrimaryKeySelective(spu);
+        if (count != 1) {
+            throw new LyException(ExceptionEnum.GOODS_EDIT_ERROR);
+        }
+        // 修改spu详情
+        count = spuDetailMapper.updateByPrimaryKeySelective(spu.getSpuDetail());
+        if (count != 1) {
+            throw new LyException(ExceptionEnum.GOODS_EDIT_ERROR);
+        }
+
+        // 新增sku和stock
+        saveSkuAndStock(spu);
     }
 }

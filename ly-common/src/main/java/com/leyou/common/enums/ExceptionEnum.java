@@ -22,7 +22,9 @@ public enum ExceptionEnum {
     BRAND_SAVE_ERROR(500, "新增品牌失败"),
     INVAILD_FILE_TYPE(400, "无效图片类型"),
     UPLOAD_FILE_ERROR(500, "上传图片失败"),
-    GOODS_SAVE_ERROR(500, "新增商品失败");
+    GOODS_SAVE_ERROR(500, "新增商品失败"),
+    GOODS_EDIT_ERROR(500, "修改商品失败"),
+    GOODS_ID_CANNOT_BE_NULL(400, "商品id不能为空");
 
     private int code;
     private String msg;
