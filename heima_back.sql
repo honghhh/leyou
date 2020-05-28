@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 26/05/2020 17:53:29
+ Date: 28/05/2020 11:54:07
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `tb_brand`  (
   `image` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '品牌图片地址',
   `letter` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '品牌的首字母',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 325410 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '品牌表，一个品牌下有多个商品（spu），一对多关系' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 325411 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '品牌表，一个品牌下有多个商品（spu），一对多关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_brand
@@ -196,9 +196,11 @@ INSERT INTO `tb_brand` VALUES (316618, 'RONXS', '', 'R');
 INSERT INTO `tb_brand` VALUES (325396, '飞利浦（PHILIPS）', '', 'P');
 INSERT INTO `tb_brand` VALUES (325398, '比亚兹（ESK）', '', 'B');
 INSERT INTO `tb_brand` VALUES (325399, '亿色(ESR)', '', 'Y');
+INSERT INTO `tb_brand` VALUES (325401, '黑马', 'http://image.leyou.com/group1/M00/00/00/wKiaZl7M9L2AQM7dAABQHpeIMKQ456.jpg', 'H');
 INSERT INTO `tb_brand` VALUES (325405, '黑马', '', 'H');
 INSERT INTO `tb_brand` VALUES (325408, '白马', 'http://image.leyou.com/upload/qrcode.jpg', 'B');
 INSERT INTO `tb_brand` VALUES (325409, '红马', 'http://image.leyou.com/group1/M00/00/00/wKiaZl7M9L2AQM7dAABQHpeIMKQ456.jpg', 'H');
+INSERT INTO `tb_brand` VALUES (325410, '黑马手机', 'http://image.leyou.com/group1/M00/00/00/wKiaZl7Pk_2AJKWvAABQHpeIMKQ538.jpg', 'H');
 
 -- ----------------------------
 -- Table structure for tb_category
@@ -1989,7 +1991,7 @@ CREATE TABLE `tb_sku`  (
   `last_update_time` datetime(0) NOT NULL COMMENT '最后修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `key_spu_id`(`spu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27359021555 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'sku表,该表表示具体的商品实体,如黑色的 64g的iphone 8' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27359021558 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'sku表,该表表示具体的商品实体,如黑色的 64g的iphone 8' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_sku
@@ -2672,6 +2674,9 @@ INSERT INTO `tb_sku` VALUES (27359021536, 207, 'oopp2 128GB 4GB 宝强绿 273590
 INSERT INTO `tb_sku` VALUES (27359021552, 215, '黑马游戏手机2 深空黑 8GB 128GB', 'http://image.leyou.com/group1/M00/00/00/wKg4ZVrqqVGAdrnvAAHKGB0tKGM523.jpg', 4199, '0_0_0', '{\"机身颜色\":\"深空黑\",\"内存\":\"8GB\",\"机身存储\":\"128GB\"}', 1, '2018-05-15 23:59:27', '2018-05-15 23:59:27');
 INSERT INTO `tb_sku` VALUES (27359021553, 215, '黑马游戏手机2 深空黑 8GB 64GB', 'http://image.leyou.com/group1/M00/00/00/wKg4ZVrqqV6ABvrHAAE4RAvpaEA841.jpg', 3699, '0_0_1', '{\"机身颜色\":\"深空黑\",\"内存\":\"8GB\",\"机身存储\":\"64GB\"}', 1, '2018-05-15 23:59:27', '2018-05-15 23:59:27');
 INSERT INTO `tb_sku` VALUES (27359021554, 215, '黑马游戏手机2 苍穹灰 8GB 128GB', 'http://image.leyou.com/group1/M00/00/00/wKg4ZVrqqWyAZvWJAAIAtobunyc315.jpg', 4199, '1_0_0', '{\"机身颜色\":\"苍穹灰\",\"内存\":\"8GB\",\"机身存储\":\"128GB\"}', 1, '2018-05-15 23:59:27', '2018-05-15 23:59:27');
+INSERT INTO `tb_sku` VALUES (27359021555, 222, '朝天椒2 4GB 128GB', 'http://image.leyou.com/group1/M00/00/00/wKiaZl7PpK-AN0BOAABQHpeIMKQ375.jpg', 9900, '0_0', '{\"2\":\"4GB\",\"3\":\"128GB\"}', 1, '2020-05-28 11:47:17', '2020-05-28 11:47:17');
+INSERT INTO `tb_sku` VALUES (27359021556, 222, '朝天椒2 6GB 128GB', 'http://image.leyou.com/group1/M00/00/00/wKiaZl7PpLaAP887AABQHpeIMKQ015.jpg', 999900, '1_0', '{\"2\":\"6GB\",\"3\":\"128GB\"}', 1, '2020-05-28 11:47:17', '2020-05-28 11:47:17');
+INSERT INTO `tb_sku` VALUES (27359021557, 222, '朝天椒2 6GB 1024GB', 'http://image.leyou.com/group1/M00/00/00/wKiaZl7PpLmARj_hAABQHpeIMKQ503.jpg', 9999900, '1_1', '{\"2\":\"6GB\",\"3\":\"1024GB\"}', 1, '2020-05-28 11:47:17', '2020-05-28 11:47:17');
 
 -- ----------------------------
 -- Table structure for tb_spec_group
@@ -2687,7 +2692,7 @@ CREATE TABLE `tb_spec_group`  (
 -- ----------------------------
 -- Records of tb_spec_group
 -- ----------------------------
-INSERT INTO `tb_spec_group` VALUES (5, 76, '华为');
+INSERT INTO `tb_spec_group` VALUES (5, 76, '主体');
 
 -- ----------------------------
 -- Table structure for tb_spec_param
@@ -2704,12 +2709,16 @@ CREATE TABLE `tb_spec_param`  (
   `searching` tinyint(4) NULL DEFAULT NULL COMMENT '是否用于搜索过滤，true或false',
   `segments` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数值类型参数，如果需要搜索',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规格参数表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '规格参数表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_spec_param
 -- ----------------------------
-INSERT INTO `tb_spec_param` VALUES (1, 76, 5, 'CPU品牌', 0, NULL, 1, 1, NULL);
+INSERT INTO `tb_spec_param` VALUES (1, 76, 5, '品牌', 0, NULL, 1, 1, NULL);
+INSERT INTO `tb_spec_param` VALUES (2, 76, 5, '内存', 1, 'G', 0, 0, NULL);
+INSERT INTO `tb_spec_param` VALUES (3, 76, 5, '硬盘', 1, 'GB', 0, 0, NULL);
+INSERT INTO `tb_spec_param` VALUES (4, 76, 5, '型号', 0, NULL, 1, 1, NULL);
+INSERT INTO `tb_spec_param` VALUES (5, 76, 5, '上市年份', 1, '年', 1, 1, NULL);
 
 -- ----------------------------
 -- Table structure for tb_specification
@@ -2745,7 +2754,7 @@ CREATE TABLE `tb_spu`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '添加时间',
   `last_update_time` datetime(0) NULL DEFAULT NULL COMMENT '最后修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 216 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'spu表，该表描述的是一个抽象性的商品，比如 iphone8' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 223 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'spu表，该表描述的是一个抽象性的商品，比如 iphone8' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_spu
@@ -2937,6 +2946,7 @@ INSERT INTO `tb_spu` VALUES (204, '小米（MI）电视', '电视新品上新 !'
 INSERT INTO `tb_spu` VALUES (206, '海尔模卡（MOOKA）U55H3 ', '【预约，4月23日2099限量抢】海尔匠心打造，互联网定制，55英寸客厅尊贵机皇，高颜值外观！55吋曲面性价比甄选戳这里', 103, 104, 105, 7817, 1, 1, '2018-04-22 09:57:44', '2018-04-29 09:38:48');
 INSERT INTO `tb_spu` VALUES (207, 'oopp2', 'ppoo', 74, 75, 76, 2032, 1, 1, '2018-04-29 09:46:15', '2018-04-29 10:04:15');
 INSERT INTO `tb_spu` VALUES (215, '黑马游戏手机2', '流畅游戏体验，快到你不敢相信自己的手', 74, 75, 76, 325401, 1, 1, '2018-05-15 21:39:34', '2018-05-15 23:59:27');
+INSERT INTO `tb_spu` VALUES (222, '朝天椒2', '火辣辣的辣椒', 74, 75, 76, 18362, 1, 0, '2020-05-28 11:47:17', '2020-05-28 11:47:17');
 
 -- ----------------------------
 -- Table structure for tb_spu_detail
@@ -2945,8 +2955,8 @@ DROP TABLE IF EXISTS `tb_spu_detail`;
 CREATE TABLE `tb_spu_detail`  (
   `spu_id` bigint(20) NOT NULL,
   `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '商品描述信息',
-  `specifications` varchar(3000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '全部规格参数数据',
-  `spec_template` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '特有规格参数及可选值信息，json格式',
+  `generic_spec` varchar(3000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '通用规格参数',
+  `special_spec` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '特有规格参数及可选值信息，json格式',
   `packing_list` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '包装清单',
   `after_service` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '售后服务',
   PRIMARY KEY (`spu_id`) USING BTREE
@@ -3140,6 +3150,7 @@ INSERT INTO `tb_spu_detail` VALUES (202, '<p class=\"ql-align-center\"><img src=
 INSERT INTO `tb_spu_detail` VALUES (203, '<p class=\"ql-align-center\"><img src=\"https://img20.360buyimg.com/vc/jfs/t3133/223/4034267269/239500/1ea5d49/57fef928N26cc2fca.jpg\"></p><p class=\"ql-align-center\"><img src=\"https://img20.360buyimg.com/vc/jfs/t3892/243/1456372044/177763/9a87b870/587876c8N75c7a3a1.jpg\"></p><p class=\"ql-align-center\"><img src=\"https://img20.360buyimg.com/vc/jfs/t3817/337/3135669057/142569/30f2cc84/587876ccN2be41b0c.jpg\"></p><p class=\"ql-align-center\"><img src=\"https://img20.360buyimg.com/vc/jfs/t3925/304/1461532065/199151/488c76b/587876d2N38b41e42.jpg\"></p><p><br></p>', '[{\"group\":\"主体\",\"params\":[{\"k\":\"品牌\",\"searchable\":false,\"global\":true,\"numerical\":false,\"unit\":\"\",\"options\":[],\"v\":\"亿色\"},{\"k\":\"适用机型\",\"searchable\":false,\"global\":false,\"numerical\":false,\"unit\":\"\"}]},{\"group\":\"规格尺寸\",\"params\":[{\"k\":\"贴膜尺寸\",\"searchable\":true,\"global\":true,\"numerical\":true,\"unit\":\"英寸\",\"options\":[],\"v\":5.6},{\"k\":\"材质\",\"searchable\":true,\"global\":true,\"numerical\":false,\"unit\":\"\",\"options\":[\"钢化玻璃\",\"水凝膜\"],\"v\":\"钢化玻璃\"},{\"k\":\"类型\",\"searchable\":true,\"global\":true,\"numerical\":false,\"unit\":\"\",\"options\":[\"前膜\",\"后膜\",\"磨砂\",\"防指纹\",\"高透膜\"],\"v\":\"高透膜\"}]}]', '{\"适用机型\":[\"iphone6\",\"iphone7\"]}', '苹果iPhone 7/6/6s钢化玻璃膜×1、 贴膜工具×', 'wu');
 INSERT INTO `tb_spu_detail` VALUES (204, '<p><img src=\"https://img30.360buyimg.com/jgsq-productsoa/jfs/t17938/251/1604315929/57748/b54f6a88/5ad050dcN50b178e9.jpg\"></p>', '[{\"group\":\"主体参数\",\"params\":[{\"k\":\"品牌\",\"searchable\":false,\"global\":true,\"numerical\":false,\"unit\":\"\",\"options\":[],\"v\":\"小米\"},{\"k\":\"型号\",\"searchable\":false,\"global\":false,\"numerical\":false,\"unit\":\"\"},{\"k\":\"产品颜色\",\"searchable\":false,\"global\":true,\"numerical\":false,\"unit\":\"\",\"options\":[],\"v\":\"黑色\"},{\"k\":\"上市日期\",\"searchable\":false,\"global\":true,\"numerical\":false,\"unit\":\"\",\"options\":[],\"v\":\"2017\"},{\"k\":\"能效等级\",\"searchable\":true,\"global\":true,\"numerical\":false,\"unit\":\"\",\"options\":[\"一级能效\",\"二级能效\",\"三级能效\",\"政府节能\"],\"v\":\"一级能效\"}]},{\"group\":\"显示参数\",\"params\":[{\"k\":\"屏幕尺寸\",\"searchable\":true,\"global\":false,\"numerical\":true,\"unit\":\"英寸\"},{\"k\":\"屏幕分辨率\",\"searchable\":true,\"global\":true,\"numerical\":false,\"unit\":\"\",\"options\":[\"超高清\",\"全高清\",\"高清\"],\"v\":\"超高清\"}]}]', '{\"型号\":[\"小米电视4A\",\"小米电视4C\"],\"屏幕尺寸\":[\"50\",\"55\"]}', '屏幕*1，支架*2，安装说明*1，蓝牙语音遥控器*1，螺丝包*1,7号电池*2节', '本产品全国联保，享受三包服务，质保期为：一年质保\n本产品提供上门安装调试、提供上门检测和维修等售后服务，自收到商品之日起，如您所购买家电商品出现质量问题，请先联系厂家进行检测，凭厂商提供的故障检测证明，在“我的京东-客户服务-返修退换货”页面提交退换申请，将有专业售后人员提供服务。');
 INSERT INTO `tb_spu_detail` VALUES (215, '<p class=\"ql-align-center\"><img src=\"https://img13.360buyimg.com/cms/jfs/t17050/206/516927520/88714/4d2250d1/5a938547N4386663d.jpg\" height=\"240\" width=\"750\"></p><p><br></p>', '[{\"group\":\"主体\",\"params\":[{\"k\":\"品牌\",\"searchable\":false,\"global\":true,\"v\":\"黑马\"},{\"k\":\"型号\",\"searchable\":false,\"global\":true,\"v\":\"黑马3号\"},{\"k\":\"上市年份\",\"searchable\":false,\"global\":true,\"numerical\":true,\"unit\":\"年\",\"v\":\"2019\"}]},{\"group\":\"基本信息\",\"params\":[{\"k\":\"机身颜色\",\"searchable\":false,\"global\":false},{\"k\":\"机身重量（g）\",\"searchable\":false,\"global\":true,\"numerical\":true,\"unit\":\"g\",\"v\":\"198\"},{\"k\":\"机身材质工艺\",\"searchable\":false,\"global\":true,\"v\":\"金属\"}]},{\"group\":\"操作系统\",\"params\":[{\"k\":\"操作系统\",\"searchable\":true,\"global\":true,\"v\":\"安卓\"}]},{\"group\":\"主芯片\",\"params\":[{\"k\":\"CPU品牌\",\"searchable\":true,\"global\":true,\"v\":\"骁龙（Snapdragon)\"},{\"k\":\"CPU型号\",\"searchable\":false,\"global\":true,\"v\":\"骁龙845\"},{\"k\":\"CPU核数\",\"searchable\":true,\"global\":true,\"v\":\"八核\"},{\"k\":\"CPU频率\",\"searchable\":true,\"global\":true,\"numerical\":true,\"unit\":\"GHz\",\"v\":\"2.6\"}]},{\"group\":\"存储\",\"params\":[{\"k\":\"内存\",\"searchable\":true,\"global\":false,\"numerical\":false,\"unit\":\"\"},{\"k\":\"机身存储\",\"searchable\":true,\"global\":false,\"numerical\":false,\"unit\":\"\"}]},{\"group\":\"屏幕\",\"params\":[{\"k\":\"主屏幕尺寸（英寸）\",\"searchable\":true,\"global\":true,\"numerical\":true,\"unit\":\"英寸\",\"v\":\"5.9\"},{\"k\":\"分辨率\",\"searchable\":false,\"global\":true,\"v\":\"2180*1280\"}]},{\"group\":\"摄像头\",\"params\":[{\"k\":\"前置摄像头\",\"searchable\":true,\"global\":true,\"numerical\":true,\"unit\":\"万\",\"v\":\"1200\"},{\"k\":\"后置摄像头\",\"searchable\":true,\"global\":true,\"numerical\":true,\"unit\":\"万\",\"v\":\"1800\"}]},{\"group\":\"电池信息\",\"params\":[{\"k\":\"电池容量（mAh）\",\"searchable\":true,\"global\":true,\"numerical\":true,\"unit\":\"mAh\",\"v\":\"4000\"}]}]', '{\"机身颜色\":[\"深空黑\",\"苍穹灰\"],\"内存\":[\"8GB\"],\"机身存储\":[\"128GB\",\"64GB\"]}', '手机主机*1，电源适配器*1，USB Type-C数据线*1，Type-C To Audio转接线*1，取卡针*1，手机保护壳*1，保护膜*1，入门指南&三包凭证*1', '三年包换，只换不修');
+INSERT INTO `tb_spu_detail` VALUES (222, '<p><img src=\"http://image.leyou.com/group1/M00/00/00/wKiaZl7PpH2AKumDAABQHpeIMKQ282.jpg\"></p>', '{\"1\":\"小辣椒\",\"4\":\"朝天椒2\",\"5\":\"2020\"}', '{\"2\":[\"4GB\",\"6GB\"],\"3\":[\"128GB\",\"1024GB\"]}', '辣椒串', '123');
 
 -- ----------------------------
 -- Table structure for tb_stock
@@ -3909,6 +3920,9 @@ INSERT INTO `tb_stock` VALUES (27359021548, NULL, NULL, 99);
 INSERT INTO `tb_stock` VALUES (27359021552, NULL, NULL, 99);
 INSERT INTO `tb_stock` VALUES (27359021553, NULL, NULL, 99);
 INSERT INTO `tb_stock` VALUES (27359021554, NULL, NULL, 99);
+INSERT INTO `tb_stock` VALUES (27359021555, NULL, NULL, 99);
+INSERT INTO `tb_stock` VALUES (27359021556, NULL, NULL, 9999);
+INSERT INTO `tb_stock` VALUES (27359021557, NULL, NULL, 99999);
 
 -- ----------------------------
 -- Table structure for tb_user
