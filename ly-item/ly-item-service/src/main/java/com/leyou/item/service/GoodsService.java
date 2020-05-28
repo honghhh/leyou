@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -135,5 +136,37 @@ public class GoodsService {
             throw new LyException(ExceptionEnum.GOODS_DETAIL_NOT_FOUND);
         }
         return detail;
+    }
+
+    public List<Sku> querySkuBySpuId(Long spuId) {
+        Sku sku = new Sku();
+        sku.setSpuId(spuId);
+        List<Sku> list = skuMapper.select(sku);
+        if (CollectionUtils.isEmpty(list)) {
+            throw new LyException(ExceptionEnum.GOODS_SKU_NOT_FOUND);
+        }
+        // 查询库存
+        // for (Sku s : list) {
+        //     Stock stock = stockMapper.selectByPrimaryKey(s.getId());
+        //     if (stock == null) {
+        //         throw new LyException(ExceptionEnum.GOODS_STOCK_NOT_FOUND);
+        //     }
+        //     s.setStock(stock.getStock());
+        // }
+
+        // 查询库存优化
+        List<Long> ids = list.stream().map(Sku::getId).collect(Collectors.toList());
+        List<Stock> stocks = stockMapper.selectByIdList(ids);
+        if (CollectionUtils.isEmpty(stocks)) {
+            throw new LyException(ExceptionEnum.GOODS_STOCK_NOT_FOUND);
+        }
+        Map<Long, Integer> stockMap = stocks.stream()
+                .collect(Collectors.toMap(Stock::getSkuId, Stock::getStock));
+        list.forEach(s -> s.setStock(stockMap.get(s.getId())));
+        return list;
+    }
+
+    public void updatesGoods(Spu spu) {
+        // 删除sku和stock
     }
 }
