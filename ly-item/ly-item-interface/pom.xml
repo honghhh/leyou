@@ -15,11 +15,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper-core</artifactId>
-            <version>1.0.4</version>
-        </dependency>
-        <dependency>
             <groupId>com.leyou.common</groupId>
             <artifactId>ly-common</artifactId>
             <version>1.0.0-SNAPSHOT</version>

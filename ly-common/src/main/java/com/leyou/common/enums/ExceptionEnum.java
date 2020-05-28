@@ -18,7 +18,8 @@ public enum ExceptionEnum {
     GOODS_NOT_FOUND(404, "商品不存在"),
     BRAND_SAVE_ERROR(500, "新增品牌失败"),
     INVAILD_FILE_TYPE(400, "无效图片类型"),
-    UPLOAD_FILE_ERROR(500, "上传图片失败");
+    UPLOAD_FILE_ERROR(500, "上传图片失败"),
+    GOODS_SAVE_ERROR(500, "新增商品失败");
 
     private int code;
     private String msg;

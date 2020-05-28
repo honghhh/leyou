@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Table(name = "tb_spu_detail")
 @Data
-public class SpuDetali {
+public class SpuDetail {
     @Id
     private Long spuId; // 对应的SPU的id
     private String description; // 商品描述
