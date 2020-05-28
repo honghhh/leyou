@@ -128,4 +128,12 @@ public class GoodsService {
             throw new LyException(ExceptionEnum.GOODS_SAVE_ERROR);
         }
     }
+
+    public SpuDetail queryDetailById(Long spuId) {
+        SpuDetail detail = spuDetailMapper.selectByPrimaryKey(spuId);
+        if (detail == null) {
+            throw new LyException(ExceptionEnum.GOODS_DETAIL_NOT_FOUND);
+        }
+        return detail;
+    }
 }
