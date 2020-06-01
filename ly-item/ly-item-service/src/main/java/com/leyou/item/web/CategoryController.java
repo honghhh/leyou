@@ -23,4 +23,9 @@ public class CategoryController {
             @RequestParam(value = "pid", defaultValue = "0") Long pid) {
         return ResponseEntity.ok(categoryService.queryListByParent(pid));
     }
+
+    @GetMapping("list/ids")
+    public ResponseEntity<List<Category>> queryCategoryByIds(@RequestParam("ids") List<Long> ids) {
+        return ResponseEntity.ok(categoryService.queryByIds(ids));
+    }
 }
