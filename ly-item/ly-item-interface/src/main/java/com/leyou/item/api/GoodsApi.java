@@ -22,7 +22,7 @@ public interface GoodsApi {
     PageResult<Spu> querySpuByPage(
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "rows", defaultValue = "5") Integer rows,
-            @RequestParam(value = "saleable", required = false) String saleable,
+            @RequestParam(value = "saleable", required = false) Boolean saleable,
             @RequestParam(value = "key", required = false) String key
     );
 }

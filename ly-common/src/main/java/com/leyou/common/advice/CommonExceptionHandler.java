@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CommonExceptionHandler {
 
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(LyException.class)
     public ResponseEntity<ExceptionResult> handleException(LyException e) {
         ExceptionEnum exceptionEnum = e.getExceptionEnum();
         return ResponseEntity.status(exceptionEnum.getCode()).

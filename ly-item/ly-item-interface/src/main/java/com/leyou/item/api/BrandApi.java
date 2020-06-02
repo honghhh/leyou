@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 public interface BrandApi {
 
-    @GetMapping("{id}")
+    @GetMapping("brand/{id}")
     Brand queryBrandId(@PathVariable("id") Long id);
 }

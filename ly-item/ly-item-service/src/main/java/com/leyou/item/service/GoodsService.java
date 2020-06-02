@@ -45,7 +45,7 @@ public class GoodsService {
     @Autowired
     private StockMapper stockMapper;
 
-    public PageResult<Spu> querySpuByPage(Integer page, Integer rows, String saleable, String key) {
+    public PageResult<Spu> querySpuByPage(Integer page, Integer rows, Boolean saleable, String key) {
         // 1、查询SPU
         // 分页,最多允许查100条
         PageHelper.startPage(page, Math.min(rows, 100));

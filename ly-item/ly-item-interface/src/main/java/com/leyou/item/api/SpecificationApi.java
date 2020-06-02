@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SpecificationApi {
 
-    @GetMapping("/params")
+    @GetMapping("spec/params")
     List<SpecParam> queryParamList(
             @RequestParam(value = "gid", required = false) Long gid,
             @RequestParam(value = "cid", required = false) Long cid,
