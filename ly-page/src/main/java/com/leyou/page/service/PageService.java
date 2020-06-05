@@ -10,14 +10,20 @@ import com.leyou.page.client.BrandClient;
 import com.leyou.page.client.CategoryClient;
 import com.leyou.page.client.GoodsClient;
 import com.leyou.page.client.SpecificationClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class PageService {
 
@@ -29,6 +35,9 @@ public class PageService {
     private GoodsClient goodsClient;
     @Autowired
     private SpecificationClient specClient;
+
+    @Autowired
+    private TemplateEngine templateEngine;
 
     public Map<String, Object> loadModel(Long spuId) {
         Map<String, Object> model = new HashMap<>();
@@ -52,5 +61,19 @@ public class PageService {
         model.put("categories", categories);
         model.put("specs", specs);
         return model;
+    }
+
+    public void createHtml(Long spuId) {
+        // 上下文
+        Context context = new Context();
+        context.setVariables(loadModel(spuId));
+        // 输出流
+        File dest = new File("D:\\", spuId + ".html");
+        try (PrintWriter writer = new PrintWriter(dest, "UTF-8")) {
+            // 生成HTML
+            templateEngine.process("item", context, writer);
+        } catch (Exception e) {
+            log.error("[静态页服务] 生成静态页异常", e);
+        }
     }
 }
