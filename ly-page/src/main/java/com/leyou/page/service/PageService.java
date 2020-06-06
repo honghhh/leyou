@@ -68,12 +68,25 @@ public class PageService {
         Context context = new Context();
         context.setVariables(loadModel(spuId));
         // 输出流
-        File dest = new File("D:\\", spuId + ".html");
+        File dest = new File("D:\\upload", spuId + ".html");
+
+        if (dest.exists()) {
+            dest.delete();
+        }
+
         try (PrintWriter writer = new PrintWriter(dest, "UTF-8")) {
             // 生成HTML
             templateEngine.process("item", context, writer);
         } catch (Exception e) {
             log.error("[静态页服务] 生成静态页异常", e);
+        }
+    }
+
+    public void deleteHtml(Long spuId) {
+        // 输出流(流可以自动释放)
+        File dest = new File("D:\\upload", spuId + ".html");
+        if(dest.exists()){
+            dest.delete();
         }
     }
 }
