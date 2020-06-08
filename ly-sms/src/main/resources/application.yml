@@ -12,7 +12,7 @@ spring:
     host: 192.168.154.102
 ly:
   sms:
-    accessKeyId: LTAI4GCwhLs8pgMPjcu3ZBGR # 自己的accessKeyId
-    accessKeySecret: GEfyYJiCrJyBThCipSbvKPj56CjEsp # 自己的AccessKeySecret
+    accessKeyId: LTAI4GCwhLs8pgMPjcu3ZBGK # 自己的accessKeyId
+    accessKeySecret: GEfyYJiCrJyBThCipSbvKPj56CjEsa # 自己的AccessKeySecret
     signName: 乐优商城 # 签名名称
     verifyCodeTemplate: SMS_192531847 # 模板名称 sms参数均少一位，ID密码请去阿里云官方申请
