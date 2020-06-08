@@ -2,6 +2,7 @@ package com.leyou.user.controller;
 
 import com.leyou.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,4 +19,11 @@ public class UserController {
 
         return ResponseEntity.ok(userService.checkData(data, type));
     }
+
+    @PostMapping("code")
+    public ResponseEntity<Void> sendCode(@RequestParam("phone") String phone){
+        userService.sendCode(phone);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }
