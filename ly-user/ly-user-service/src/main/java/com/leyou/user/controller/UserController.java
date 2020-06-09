@@ -40,4 +40,11 @@ public class UserController {
         userService.register(user, code);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @GetMapping("query")
+    public ResponseEntity<User> queryUsernameAndPassword(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password){
+        return ResponseEntity.ok(userService.queryUsernameAndPassword(username,password));
+    }
 }
