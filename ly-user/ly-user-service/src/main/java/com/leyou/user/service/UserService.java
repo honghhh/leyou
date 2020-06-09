@@ -5,11 +5,15 @@ import com.leyou.common.exception.LyException;
 import com.leyou.common.utils.NumberUtils;
 import com.leyou.user.mapper.UserMapper;
 import com.leyou.user.pojo.User;
+import com.leyou.user.utils.CodecUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -58,5 +62,24 @@ public class UserService {
 
         // 保存验证码到redis中 以供后续验证
         redisTemplate.opsForValue().set(key, code, 5, TimeUnit.MINUTES);
+    }
+
+    // 用户注册
+    public void register(@Valid User user, String code) {
+
+        // 校验验证码
+        String cacheCode = redisTemplate.opsForValue().get(KEY_PREFIX + user.getPhone());
+        if(!StringUtils.equals(cacheCode, code)){
+            throw new LyException(ExceptionEnum.INVALID_VERIFY_CODE);
+        }
+
+        // 对密码进行加密
+        String salt = CodecUtils.generateSalt();
+        user.setSalt(salt);
+        user.setPassword(CodecUtils.md5Hex(user.getPassword() , salt));
+
+        // 写入数据库
+        user.setCreated(new Date());
+        userMapper.insert(user);
     }
 }
