@@ -15,11 +15,6 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
-    /**
-     * 新增商品到购物车
-     * @param cart
-     * @return
-     */
     @PostMapping
     public ResponseEntity<Void> addCart(@RequestBody Cart cart) {
         cartService.addCart(cart);
