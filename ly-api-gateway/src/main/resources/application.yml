@@ -25,6 +25,7 @@ zuul:
     user-service: /user/**
     auth-service: /auth/**
     cart-service: /cart/**
+    order-service: /order/**
   add-host-header: true
   sensitive-headers:
 ribbon:
