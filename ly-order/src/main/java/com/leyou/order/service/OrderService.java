@@ -18,6 +18,7 @@ import com.leyou.order.mapper.OrderStatusMapper;
 import com.leyou.order.pojo.Order;
 import com.leyou.order.pojo.OrderDetail;
 import com.leyou.order.pojo.OrderStatus;
+import com.leyou.order.utils.PayHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,8 @@ public class OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
-
     @Autowired
     private OrderDetailMapper orderDetailMapper;
-
     @Autowired
     private OrderStatusMapper orderStatusMapper;
 
@@ -46,6 +45,9 @@ public class OrderService {
 
     @Autowired
     private GoodsClient goodsClient;
+
+    @Autowired
+    private PayHelper payHelper;
 
     @Transactional
     public Long createOrder(OrderDTO orderDTO) {
@@ -159,5 +161,58 @@ public class OrderService {
         order.setOrderStatus(orderStatus);
 
         return order;
+    }
+
+    public String createPayUrl(Long orderId) {
+
+        // 查询订单获得总金额
+        Order order = queryOrderById(orderId);
+
+        // 判断订单状态，如果订单已支付，下面的查询就很多余
+        OrderStatus orderStatus = order.getOrderStatus();
+        Integer status = orderStatus.getStatus();
+        if(status != OrderStatusEnum.UN_PAY.value()){
+            throw new LyException(ExceptionEnum.ORDER_STATUS_ERROE);
+        }
+
+        Long actualPay = 1L/*order.getActualPay()*/;
+        OrderDetail detail = order.getOrderDetails().get(0);//订单中可能有多件商品，获取第一件商品的标题作为订单的描述
+        String desc = detail.getTitle();
+
+        return payHelper.createOrder(orderId, actualPay, desc);
+    }
+
+    public void handleNotify(Map<String, String> result) {
+        // 1 数据校验
+        payHelper.isSuccess(result);
+        // 2 签名校验
+        payHelper.isValidSign(result);
+
+        // 3 金额校验
+        String totalFeeStr = result.get("total_fee");
+        String tradeNo = result.get("out_trade_no");
+        if(StringUtils.isEmpty(totalFeeStr) || StringUtils.isEmpty(tradeNo)){
+            throw new LyException(ExceptionEnum.INVALID_ORDER_PARAM);
+        }
+        Long totalFee = Long.valueOf(totalFeeStr);
+        Long orderId = Long.valueOf(tradeNo);
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        if(totalFee != /*order.getActualPay()*/ 1){
+            // 金额不符
+            throw new LyException(ExceptionEnum.INVALID_ORDER_PARAM);
+        }
+
+        // 4 修改订单状态
+        OrderStatus status = new OrderStatus();
+        status.setStatus(OrderStatusEnum.PAYED.value());
+        status.setOrderId(orderId);
+        status.setPaymentTime(new Date());
+        int count = orderStatusMapper.updateByPrimaryKeySelective(status);
+        if(count != 1){
+            throw new LyException(ExceptionEnum.UPDATE_ORDER_STATUS_ERROR);
+        }
+
+        log.info("[订单回调], 订单支付成功! 订单编号:{}", orderId);
+
     }
 }
