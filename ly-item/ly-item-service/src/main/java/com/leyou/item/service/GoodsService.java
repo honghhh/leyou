@@ -2,6 +2,7 @@ package com.leyou.item.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.leyou.common.dto.CartDTO;
 import com.leyou.common.enums.ExceptionEnum;
 import com.leyou.common.exception.LyException;
 import com.leyou.common.vo.PageResult;
@@ -238,5 +239,17 @@ public class GoodsService {
         skus.forEach(s ->s.setStock(stockMap.get(s.getId())));
 
         return skus;
+    }
+
+    @Transactional
+    public void decreaseStock(List<CartDTO> cartDTOS) {
+        // 不能用if判断来实现减库存，当线程很多的时候，有可能引发超卖问题
+        // 加锁也不可以  性能太差，只有一个线程可以执行，当搭了集群时synchronized只锁住了当前一个tomcat
+        for (CartDTO cartDTO : cartDTOS) {
+            int count = stockMapper.decreaseStock(cartDTO.getSkuId(), cartDTO.getNum());
+            if(count != 1){
+                throw new LyException(ExceptionEnum.STOCK_NOT_ENOUGH);
+            }
+        }
     }
 }

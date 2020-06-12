@@ -24,3 +24,6 @@ ly:
   jwt:
     pubKeyPath: D:/upload/rsa/rsa.pub # 公钥地址
     cookieName: LY_TOKEN
+  worker:
+    workerId: 1
+    dataCenterId: 1

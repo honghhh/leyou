@@ -28,7 +28,9 @@ public enum ExceptionEnum {
     INVALID_USER_DATA_TYPE(400, "用户数据类型无效"),
     INVALID_VERIFY_CODE(400, "无效的验证码"),
     INVALID_USERNAME_PASSWORD(400, "用户名或密码错误"),
-    NO_AUTHORIZED(403, "未授权");
+    NO_AUTHORIZED(403, "未授权"),
+    CREATE_ORDER_ERROR(500, "创建订单失败"),
+    STOCK_NOT_ENOUGH(400,"库存不足！" );
 
     private int code;
     private String msg;
