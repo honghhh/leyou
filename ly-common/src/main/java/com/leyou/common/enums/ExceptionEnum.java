@@ -30,7 +30,10 @@ public enum ExceptionEnum {
     INVALID_USERNAME_PASSWORD(400, "用户名或密码错误"),
     NO_AUTHORIZED(403, "未授权"),
     CREATE_ORDER_ERROR(500, "创建订单失败"),
-    STOCK_NOT_ENOUGH(400,"库存不足！" );
+    STOCK_NOT_ENOUGH(400,"库存不足！" ),
+    ORDER_NOT_FOUND(404,"订单不存在！" ),
+    ORDER_DETAIL_NOT_FOUNT(404,"订单详情不存在！" ),
+    ORDER_STATUS_NOT_FOUND(404,"订单状态不存在！" );
 
     private int code;
     private String msg;
