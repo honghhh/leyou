@@ -11,6 +11,7 @@ import com.leyou.order.client.GoodsClient;
 import com.leyou.order.dto.AddressDTO;
 import com.leyou.order.dto.OrderDTO;
 import com.leyou.order.enums.OrderStatusEnum;
+import com.leyou.order.enums.PayState;
 import com.leyou.order.interceptors.UserInterceptor;
 import com.leyou.order.mapper.OrderDetailMapper;
 import com.leyou.order.mapper.OrderMapper;
@@ -214,5 +215,17 @@ public class OrderService {
 
         log.info("[订单回调], 订单支付成功! 订单编号:{}", orderId);
 
+    }
+
+    public PayState queryOrderState(Long orderId) {
+
+        OrderStatus orderStatus = orderStatusMapper.selectByPrimaryKey(orderId);
+        Integer status = orderStatus.getStatus();
+        if(!status.equals(OrderStatusEnum.UN_PAY.value())){
+            return PayState.SUCCESS;// 如果是已支付，则是真的已支付
+        }
+
+        // 如果未支付,但其实不一定是未支付,必须去微信查询支付状态
+        return payHelper.queryPayState(orderId);
     }
 }

@@ -39,4 +39,9 @@ public class OrderController {
     public ResponseEntity<String> createPayUrl(@PathVariable("id") Long orderId){
         return ResponseEntity.ok(orderService.createPayUrl(orderId));
     }
+
+    @GetMapping("state/{id}")
+    public ResponseEntity<Integer> queryOrderState(@PathVariable("id")Long orederId){
+        return ResponseEntity.ok(orderService.queryOrderState(orederId).getValue());
+    }
 }
